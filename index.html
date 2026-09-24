@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suther Flora — Fresh Flowers in Davao City</title>
+<style>
+  :root {
+    --primary: #213117;
+    --primary-light: #3a5230;
+    --primary-dark: #162110;
+    --accent: #8cb35a;
+    --accent-light: #b8d98a;
+    --cream: #fdfbf7;
+    --card: #fffcf8;
+    --border: #e8e4dc;
+    --ink: #1a1a17;
+    --muted: #6b685e;
+    --rose: #c45a7a;
+    --rose-dark: #9e3f5c;
+    --gold: #b8945c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+  }
+  a { color: var(--rose-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .logo {
+    font-size: 1.4rem; font-weight: bold;
+    color: var(--primary);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .logo img {
+    height: 32px;
+    width: auto;
+    border-radius: 4px;
+  }
+  .logo .icon { font-size: 1.6rem; display: none; }
+  .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink); font-size: 0.95rem;
+    padding: 0.3rem 0; border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .nav-links a:hover { border-bottom-color: var(--primary); text-decoration: none; }
+
+  .cart-btn {
+    background: var(--primary); color: #fff;
+    border: none; padding: 0.5rem 1.2rem;
+    border-radius: 50px; cursor: pointer;
+    font-family: inherit; font-size: 0.95rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: background 0.2s;
+  }
+  .cart-btn:hover { background: var(--primary-light); }
+  .cart-count {
+    background: var(--accent); color: var(--primary-dark);
+    border-radius: 50%; width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: bold;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #fdfbf7 0%, #eef2e6 40%, #dce8d4 100%);
+    padding: 5rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 0.7rem 1.8rem;
+    border-radius: 50px; font-family: inherit;
+    font-size: 1rem; cursor: pointer; border: none;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .btn-primary { background: var(--rose); color: #fff; }
+  .btn-primary:hover { background: var(--rose-dark); text-decoration: none; color: #fff; }
+  .btn-secondary { background: #fff; color: var(--rose-dark); border: 2px solid var(--rose); }
+  .btn-secondary:hover { background: var(--rose); color: #fff; text-decoration: none; }
+
+  .quick-info {
+    display: flex; gap: 2rem; justify-content: center;
+    flex-wrap: wrap; margin-top: 3rem;
+    font-size: 0.9rem; color: var(--muted);
+  }
+  .quick-info span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    text-align: center;
+    font-size: 1.8rem; color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+  }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 0 2rem 2rem;
+    max-width: 1100px;
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .about-strip .about-text { flex: 1; min-width: 280px; }
+  .about-strip h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.3rem; }
+  .about-strip p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.8rem; }
+  .about-strip .about-badge {
+    flex-shrink: 0; display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .badge {
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.2rem;
+    text-align: center; min-width: 120px;
+  }
+  .badge .badge-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .badge .badge-label { font-size: 0.8rem; color: var(--muted); }
+  .badge .badge-value { font-weight: bold; color: var(--primary); font-size: 0.95rem; }
+
+  /* ── PRODUCT GRID ── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+  .product-img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    background: #f5e6ec;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--rose);
+    font-size: 3rem;
+  }
+  .product-body { padding: 1rem 1.2rem 1.2rem; }
+  .product-category {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.3rem;
+  }
+  .product-name { font-size: 1.1rem; font-weight: bold; color: var(--ink); margin-bottom: 0.3rem; }
+  .product-price { font-size: 1.2rem; color: var(--primary); font-weight: bold; margin-bottom: 0.8rem; }
+  .add-btn {
+    width: 100%; padding: 0.6rem;
+    background: var(--primary); color: #fff;
+    border: none; border-radius: 8px;
+    font-family: inherit; font-size: 0.9rem;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .add-btn:hover { background: var(--primary-light); }
+
+  /* ── REVIEWS CAROUSEL ── */
+  .reviews-section {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .carousel-wrap {
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+  }
+  .carousel {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+  .review-card {
+    flex: 0 0 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+  .review-stars { color: var(--gold); font-size: 1.3rem; margin-bottom: 0.8rem; }
+  .review-text {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  .review-author { font-weight: bold; color: var(--primary); }
+  .review-source {
+    font-size: 0.8rem; color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .carousel-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+    width: 40px; height: 40px; border-radius: 50%;
+    cursor: pointer; font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+  }
+  .carousel-nav:hover { background: #fff; }
+  .carousel-nav.prev { left: 10px; }
+  .carousel-nav.next { right: 10px; }
+
+  /* ── CART DRAWER ── */
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    z-index: 200; display: none;
+  }
+  .cart-overlay.open { display: block; }
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 400px; max-width: 100%;
+    background: var(--card);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex; flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-header h2 { color: var(--rose-dark); font-size: 1.3rem; }
+  .cart-close {
+    background: none; border: none;
+    font-size: 1.5rem; cursor: pointer;
+    color: var(--muted); padding: 0.3rem;
+  }
+  .cart-close:hover { color: var(--ink); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+  .cart-empty {
+    text-align: center; padding: 3rem 1rem;
+    color: var(--muted);
+  }
+  .cart-empty .empty-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+  .cart-item {
+    display: flex; gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .cart-item-img {
+    width: 60px; height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f5e6ec;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: bold; font-size: 0.95rem; }
+  .cart-item-price { color: var(--rose-dark); font-size: 0.9rem; }
+  .cart-item-qty {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 0.3rem;
+  }
+  .qty-btn {
+    width: 26px; height: 26px;
+    border: 1px solid var(--border);
+    background: #fff; border-radius: 6px;
+    cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qty-btn:hover { background: var(--cream); }
+  .qty-value { font-weight: bold; min-width: 20px; text-align: center; }
+  .cart-item-remove {
+    background: none; border: none;
+    color: var(--muted); cursor: pointer;
+    font-size: 1.1rem; padding: 0.3rem;
+  }
+  .cart-item-remove:hover { color: #c0392b; }
+  .cart-footer {
+    padding: 1.2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .cart-total {
+    display: flex; justify-content: space-between;
+    font-size: 1.1rem; margin-bottom: 0.8rem;
+  }
+  .cart-total .total-label { color: var(--muted); }
+  .cart-total .total-value { font-weight: bold; color: var(--primary); font-size: 1.3rem; }
+  .checkout-btn {
+    width: 100%; padding: 0.8rem;
+    background: var(--primary); color: #fff;
+    border: none; border-radius: 8px;
+    font-family: inherit; font-size: 1rem;
+    cursor: pointer; font-weight: bold;
+    transition: background 0.2s;
+  }
+  .checkout-btn:hover { background: var(--primary-light); }
+
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--primary); color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    z-index: 300;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary); color: #c8d3bd;
+    padding: 3rem 2rem 1.5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  .footer-col h4 { color: #fff; margin-bottom: 0.8rem; font-size: 1rem; }
+  .footer-col p, .footer-col a {
+    color: #a8bba3; font-size: 0.9rem; display: block;
+    margin-bottom: 0.4rem; text-decoration: none;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    text-align: center; padding-top: 1.5rem;
+    border-top: 1px solid #2f4527;
+    font-size: 0.8rem; color: #8a9a80;
+    max-width: 1100px; margin: 1.5rem auto 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0.6rem 1rem; }
+    .nav-links a { font-size: 0.85rem; }
+    section { padding: 3rem 1rem; }
+    .about-strip { margin: 0 1rem 2rem; padding: 1.5rem; }
+    .cart-drawer { width: 100%; }
+    .review-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <img src="file:///C:/Users/Administrator/Downloads/sutherflora%20logo.jpg" alt="Suther Flora logo">
+    <span>Suther Flora</span>
+  </div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#products">Shop</a>
+    <a href="#reviews">Reviews</a>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <h1>Fresh Flowers,<br>Warm Memories</h1>
+  <p class="subtitle">Fresh blooms and thoughtful gifts serving Davao City — handcrafted with care for every occasion.</p>
+  <div class="hero-actions">
+    <a href="#products" class="btn btn-primary">Shop Now</a>
+    <a href="tel:+639171234567" class="btn btn-secondary">Call +63 (917) 123-4567</a>
+  </div>
+  <div class="quick-info">
+    <span>📍 Davao City, Philippines</span>
+    <span>🕐 Mon–Sat 8:00 AM – 6:00 PM · Sun 9:00 AM – 3:00 PM</span>
+    <span>📞 +63 (9XX) XXX-XXXX</span>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip" id="about">
+  <div class="about-text">
+    <h3>Locally Loved in Davao City</h3>
+    <p>Fresh blooms and curated gifts for every occasion — from everyday surprises to special celebrations across Davao City.</p>
+    <p>Serving Dabawenhon with warmth, quality, and fast local delivery.</p>
+  </div>
+  <div class="about-badge">
+    <div class="badge"><div class="badge-icon">🌹</div><div class="badge-label">Specialty</div><div class="badge-value">Fresh Flowers</div></div>
+    <div class="badge"><div class="badge-icon">🏡</div><div class="badge-label">Located</div><div class="badge-value">Davao City</div></div>
+    <div class="badge"><div class="badge-icon">⭐</div><div class="badge-label">Rating</div><div class="badge-value">5.0 / 5.0</div></div>
+    <div class="badge"><div class="badge-icon">📦</div><div class="badge-label">Delivery</div><div class="badge-value">Local + PH</div></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <h2 class="section-title">Bouquets &amp; Arrangements</h2>
+  <p class="section-sub">Handcrafted floral designs for every occasion</p>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- REVIEWS CAROUSEL -->
+<section class="reviews-section" id="reviews">
+  <h2 class="section-title">What Our Customers Say</h2>
+  <p class="section-sub">Trusted by Davao City locals — from Facebook &amp; Google</p>
+  <div class="carousel-wrap">
+    <div class="carousel" id="reviewCarousel"></div>
+    <button class="carousel-nav prev" onclick="moveCarousel(-1)" aria-label="Previous review">‹</button>
+    <button class="carousel-nav next" onclick="moveCarousel(1)" aria-label="Next review">›</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>🌸 Suther Flora</h4>
+      <p>Davao City, Philippines</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+639171234567">+63 (917) 123-4567</a>
+      <a href="mailto:sutherflora@email.com">sutherflora@email.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <p>Mon–Sat: 8:00 AM – 6:00 PM</p>
+      <p>Sunday: 9:00 AM – 3:00 PM</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#products">Shop Bouquets</a>
+      <a href="#reviews">Reviews</a>
+      <a href="https://www.facebook.com/profile.php?id=61594610433801" target="_blank">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Suther Flora — Flower Shop in Davao City
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>🛒 Your Cart</h2>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <div class="empty-icon">🌸</div>
+      <p>Your cart is empty.<br>Start shopping!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total">
+      <span class="total-label">Total</span>
+      <span class="total-value" id="cartTotal">$0.00</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── PRODUCT DATA ──
+const products = [
+  {
+    id: 1, name: "Teleflora's Sensational Harvest Bouquet",
+    category: "Bouquet — Seasonal",
+    price: 69.99,
+    emoji: "🌻",
+    desc: "Warm autumn tones of golden sunflowers, amber roses, and mustard-yellows delivered in a hand-tied bouquet."
+  },
+  {
+    id: 2, name: "Teleflora's Sunset Shine Bouquet",
+    category: "Bouquet — Romantic",
+    price: 59.99,
+    emoji: "🌅",
+    desc: "Soft pinks, coral, and creams blend into a graceful, eye-catching arrangement perfect for any occasion."
+  },
+  {
+    id: 3, name: "Teleflora's Modern Sage Bouquet",
+    category: "Bouquet — Modern",
+    price: 59.99,
+    emoji: "🌿",
+    desc: "A contemporary palette of sage-green and white blooms, clean-lined and elegant."
+  },
+  {
+    id: 4, name: "Classic Cornucopia",
+    category: "Arrangement — Holiday",
+    price: 64.99,
+    emoji: "🍂",
+    desc: "Rich harvest colors with seasonal foliage — a timeless centerpiece for Thanksgiving and fall gatherings."
+  },
+  {
+    id: 5, name: "Teleflora's Amber Glow Bouquet",
+    category: "Bouquet — Seasonal",
+    price: 54.99,
+    emoji: "🪔",
+    desc: "Radiant oranges, deep reds, and creamy accents — warm, inviting, and full of fall energy."
+  },
+  {
+    id: 6, name: "Teleflora's Country Pumpkin",
+    category: "Arrangement — Autumn",
+    price: 64.99,
+    emoji: "🎃",
+    desc: "Rustic charm with mums, foliage, and seasonal touches — perfect for doorsteps and harvest decor."
+  },
+  {
+    id: 7, name: "Teleflora's Fall Luxe Bouquet",
+    category: "Bouquet — Luxe",
+    price: 49.99,
+    emoji: "🍁",
+    desc: "A curated blend of seasonal blooms and greenery, styled for an elevated fall statement."
+  },
+  {
+    id: 8, name: "Pure Happiness Bouquet",
+    category: "Bouquet — Cheerful",
+    price: 69.99,
+    emoji: "😊",
+    desc: "Sunny yellows and bright accent flowers that bring an instant smile to any room."
+  },
+  {
+    id: 9, name: "Burst of Autumn Bouquet",
+    category: "Bouquet — Seasonal",
+    price: 39.99,
+    emoji: "🍂",
+    desc: "Affordable warmth — a compact burst of autumn colors for a small-space pick-me-up."
+  },
+  {
+    id: 10, name: "Golden Glow Flower Arrangement",
+    category: "Arrangement — Elegant",
+    price: 44.99,
+    emoji: "✨",
+    desc: "Soft gold and cream blooms arranged in a graceful, contemporary vase."
+  },
+  {
+    id: 11, name: "Teleflora's Modern Stone Succulent Garden",
+    category: "Plants — Succulents",
+    price: 69.99,
+    emoji: "🪴",
+    desc: "A stylish succulent garden in a modern stone-finish container — low-maintenance beauty."
+  },
+  {
+    id: 12, name: "Teleflora's Midnight Meow Bouquet",
+    category: "Bouquet — Unique",
+    price: 54.99,
+    emoji: "🌙",
+    desc: "Deep purple and midnight-hued blooms for a dramatic, sophisticated statement."
+  },
+];
+
+// ── REVIEW DATA (mock — replace with real Google/Facebook reviews) ──
+const reviews = [
+  {
+    text: "Beautiful, fresh flowers delivered on time! My mom loved the bouquet for her birthday.",
+    author: "Maria C.",
+    rating: 5,
+    source: "Google Review"
+  },
+  {
+    text: "Suther Flora has the best selection in Davao. Staff is friendly and prices are reasonable.",
+    author: "Ronaldo D.",
+    rating: 5,
+    source: "Facebook Review"
+  },
+  {
+    text: "Ordered a dozen roses for our anniversary — they looked stunning. Will order again!",
+    author: "Liza M.",
+    rating: 5,
+    source: "Google Review"
+  },
+  {
+    text: "Quick same-day delivery for a last-minute gift. Thank you, Suther Flora!",
+    author: "Jeric T.",
+    rating: 5,
+    source: "Facebook Review"
+  },
+  {
+    text: "Their orchid arrangements are gorgeous. Always a reliable choice for any event.",
+    author: "Catherine S.",
+    rating: 5,
+    source: "Google Review"
+  },
+];
+
+// ── STATE ──
+let cart = {};
+let carouselIndex = 0;
+let carouselInterval;
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-body">
+        <div class="product-category">${p.category}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">$${p.price.toFixed(2)}</div>
+        <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderReviews() {
+  const carousel = document.getElementById('reviewCarousel');
+  carousel.innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+      <div class="review-text">"${r.text}"</div>
+      <div class="review-author">— ${r.author}</div>
+      <div class="review-source">${r.source}</div>
+    </div>
+  `).join('');
+}
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  cart[id] = (cart[id] || 0) + 1;
+  updateCartUI();
+  showToast(`🌸 Added "${p.name}" to cart`);
+  // Auto-open cart on first add if empty
+  if (Object.keys(cart).length === 1 && Object.values(cart).every(v => v === 1)) {
+    setTimeout(() => toggleCart(), 300);
+  }
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  updateCartUI();
+}
+
+function changeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id] += delta;
+  if (cart[id] <= 0) delete cart[id];
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const totalItems = Object.values(cart).reduce((s, v) => s + v, 0);
+  document.getElementById('cartCount').textContent = totalItems;
+
+  const itemsEl = document.getElementById('cartItems');
+  const footerEl = document.getElementById('cartFooter');
+
+  if (totalItems === 0) {
+    itemsEl.innerHTML = `
+      <div class="cart-empty">
+        <div class="empty-icon">🌸</div>
+        <p>Your cart is empty.<br>Start shopping!</p>
+      </div>`;
+    footerEl.style.display = 'none';
+    return;
+  }
+
+  footerEl.style.display = 'block';
+  let total = 0;
+  itemsEl.innerHTML = Object.entries(cart).map(([idStr, qty]) => {
+    const p = products.find(x => x.id === parseInt(idStr));
+    const lineTotal = p.price * qty;
+    total += lineTotal;
+    return `
+      <div class="cart-item">
+        <div class="cart-item-img">${p.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${p.name}</div>
+          <div class="cart-item-price">$${p.price.toFixed(2)} each</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="changeQty(${p.id}, -1)">−</button>
+            <span class="qty-value">${qty}</span>
+            <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
+          </div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${p.id})" title="Remove">🗑</button>
+      </div>`;
+  }).join('');
+
+  document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+}
+
+function toggleCart() {
+  document.getElementById('cartOverlay').classList.toggle('open');
+  document.getElementById('cartDrawer').classList.toggle('open');
+}
+
+function checkout() {
+  if (Object.keys(cart).length === 0) return;
+  const total = Object.entries(cart).reduce((s, [idStr, qty]) => {
+    return s + products.find(p => p.id === parseInt(idStr)).price * qty;
+  }, 0);
+  showToast(`🌸 Order placed! Total: $${total.toFixed(2)}. Call +63 (917) 123-4567 to confirm.`);
+  cart = {};
+  updateCartUI();
+  setTimeout(() => toggleCart(), 800);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function moveCarousel(dir) {
+  carouselIndex = (carouselIndex + dir + reviews.length) % reviews.length;
+  document.getElementById('reviewCarousel').style.transform = `translateX(-${carouselIndex * 100}%)`;
+  resetCarouselTimer();
+}
+
+function resetCarouselTimer() {
+  clearInterval(carouselInterval);
+  carouselInterval = setInterval(() => moveCarousel(1), 5000);
+}
+
+// ── INIT ──
+renderProducts();
+renderReviews();
+updateCartUI();
+resetCarouselTimer();
+
+// Close cart on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartDrawer').classList.remove('open');
+  }
+});
+
+// Scroll spy for nav highlight (lightweight)
+window.addEventListener('scroll', () => {
+  const sections = ['home','about','products','reviews'];
+  let current = 'home';
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 200) current = id;
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--rose-dark)' : '';
+  });
+}, { passive: true });
+</script>
+
+</body>
+</html>
